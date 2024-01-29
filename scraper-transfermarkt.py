@@ -38,7 +38,7 @@ def get_data(session, urls):
         league_name = soup.find('h1', class_='data-header__headline-wrapper data-header__headline-wrapper--oswald').text.lower().strip().replace(' ','-')
         print(f'LEAGUE : getting data for {league_name} ⌛')
         #create dir for league
-        league_path = f'data/{league_name}'
+        league_path = os.path.join('data', league_name)
         if not os.path.exists(league_path):
             os.makedirs(league_path)
 
@@ -51,7 +51,7 @@ def get_data(session, urls):
             club_name = soup.find('h1', class_='data-header__headline-wrapper data-header__headline-wrapper--oswald').text.lower().strip().replace(' ','-')
             print(f'CLUB : getting data for {club_name} ⌛')
             #make dir for the club
-            club_path = league_path + f'/{club_name}'
+            club_path = os.path.join(league_path, club_name)
             if not os.path.exists(club_path):
                 os.makedirs(club_path)
 
@@ -90,7 +90,7 @@ def get_data(session, urls):
                                          'face_url':face_url})
 
             club_df = pd.DataFrame(players_list).drop_duplicates()
-            csv_path = club_path + f'/{club_name}.csv'
+            csv_path = os.path.join(club_path, f'{club_name}.csv')
             club_df.to_csv(csv_path)
             print(f'CLUB : data colected and saved for {club_name} ✅ \n total players in this club : {len(club_df)}')
 
