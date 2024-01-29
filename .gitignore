@@ -1,0 +1,5 @@
+# To avoid pushing data on github
+*.csv
+
+# To avoid pushing test notebooks to github
+*.ipynb
